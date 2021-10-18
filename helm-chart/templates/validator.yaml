@@ -1,0 +1,2 @@
+# {{ required "Error - missing .Values.global.argonServer" .Values.global.argonServer }}
+# {{ required "Error - missing .Values.global.token" .Values.global.token }}

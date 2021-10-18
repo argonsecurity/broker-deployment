@@ -1,0 +1,73 @@
+global:
+  ## Set Argon Server Address and token. Manadatory values
+  argonServer: https://app-broker.argon.io
+  token: ddd
+
+  ### Set Registry to pull images (default - docker.io)
+  # registry: "docker.io"
+  
+  ### Optionally Set Global Envs, for example for proxy
+  # env: 
+  #   HTTP_PROXY: proxy.example.com:3128
+  #   HTTPS_PROXY: proxy.example.com:3128
+
+  ### Optionally set common pod labels
+  # commonPodLabels: {}
+
+bitbucket:
+  url: "localhost:7990"
+  username: bitbucket
+  password: 
+
+bitbucketBroker:
+  enabled: true
+  nameSuffix: bitbucket-broker
+  image:
+    repository: argonsecurity/broker
+    tag: bitbucket
+
+  port: 9091
+  service:
+    type: ClusterIP
+    annotations: {}
+    
+  resources: {}
+  nodeSelector: {}
+  affinity: {}
+  tollerations: {}
+
+bitbucketSecretsScanner:
+  enabled: true
+  nameSuffix: bitbucket-secrets-scanner
+  image:
+    repository: argonsecurity/secrets-scanner-broker
+    tag: bitbucket
+
+  port: 9094
+  service:
+    type: ClusterIP
+    annotations: {}
+    
+  resources: {}
+  nodeSelector: {}
+  affinity: {}
+  tollerations: {}
+
+bitbucketSastScanner:
+  enabled: true
+  nameSuffix: bitbucket-sast-scanner
+  image:
+    repository: argonsecurity/sast-scanner-broker
+    tag: bitbucket
+
+  port: 9095
+  service:
+    type: ClusterIP
+    annotations: {}
+    
+  resources: {}
+  nodeSelector: {}
+  affinity: {}
+  tollerations: {}
+    
+  
