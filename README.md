@@ -7,7 +7,7 @@
 
 ## Intallation / Upgrade
 ```
-helm repo add argon https://charts.argon.io
+helm repo add argon https://argonsec.github.io/broker-deployment
 HELM_RELEASE=argon-broker
 helm upgrade -i $HELM_RELEASE argon/argon-broker --namespace argon-broker --create-namespace \
    [ --set key1=val1,key2=val2 ] [ -f my-values.yaml ] [ <helm parameters> ] 
@@ -37,7 +37,7 @@ bitbucket:
 ```
 - add argon helm repository 
 ```
-helm repo add argon https://charts.argon.io
+helm repo add argon https://argonsec.github.io/broker-deployment
 
 helm upgrade -i argon-broker argon/argon-broker --namespace argon-broker --create-namespace -f my-env-values.yaml
 ```
