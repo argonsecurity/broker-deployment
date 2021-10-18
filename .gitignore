@@ -1,1 +1,4 @@
 values-*.yaml
+*.pem
+
+out/
