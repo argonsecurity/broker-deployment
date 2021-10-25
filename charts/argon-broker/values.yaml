@@ -144,3 +144,147 @@ gitlab:
     nodeSelector: {}
     affinity: {}
     tollerations: {}
+
+#######################################################
+#  Jfrog 
+#######################################################
+jfrog:
+  url: 
+  token: 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  # ssl:
+  #   ca:
+  #   cert:
+  #   key:
+
+  jfrogBroker:
+    nameSuffix: jfrog-broker
+    image:
+      repository: argonsecurity/broker
+      tag: jfrog
+
+    port: 9091
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
+
+#######################################################
+#  Azure Devops 
+#######################################################
+azure:
+  url: 
+  token: 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  # ssl:
+  #   ca:
+  #   cert:
+  #   key:
+
+  azureBroker:
+    nameSuffix: azure-broker
+    image:
+      repository: argonsecurity/broker
+      tag: azure
+
+    port: 9091
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
+
+  azureSecretsScanner:
+    nameSuffix: azure-secrets-scanner
+    image:
+      repository: argonsecurity/secrets-scanner-broker
+      tag: azure
+
+    port: 9094
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
+
+  azureSastScanner:
+    nameSuffix: azure-sast-scanner
+    image:
+      repository: argonsecurity/sast-scanner-broker
+      tag: azure
+
+    port: 9095
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
+
+#######################################################
+#  Jenkins 
+#######################################################
+jenkins:
+  url: 
+  token: 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  # ssl:
+  #   ca:
+  #   cert:
+  #   key:
+
+  jenkinsBroker:
+    nameSuffix: jenkins-broker
+    image:
+      repository: argonsecurity/broker
+      tag: jenkins
+
+    port: 9093
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
+
+#######################################################
+#  Nexus 
+#######################################################
+nexus:
+  url: 
+  token: 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  # ssl:
+  #   ca:
+  #   cert:
+  #   key:
+
+  nexusBroker:
+    nameSuffix: nexus-broker
+    image:
+      repository: argonsecurity/broker
+      tag: nexus
+
+    port: 9093
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
