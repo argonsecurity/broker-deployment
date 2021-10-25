@@ -1,7 +1,8 @@
-{{- if .Values.bitbucketBroker.enabled }}
-{{- $v := .Values.bitbucketBroker }}
+{{- if .Values.bitbucket.url }}
+{{- $v := .Values.bitbucket.bitbucketBroker }}
 {{- $name := printf "%s-%s" (include "chart.fullname" . ) $v.nameSuffix }}
 {{- $bitbucket_secret := printf "%s-%s" (include "chart.fullname" . ) "bitbucket" }}
+{{- $ssl := dict "secret" $bitbucket_secret "ssl" .Values.bitbucket.ssl }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,10 +18,12 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/bitbucket/secret.yaml") . | sha256sum }}
       labels:
         app.kubernetes.io/name: {{ $name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-{{ include "common.podLabels" . | indent 8 }}      
+{{ include "common.podLabels" . | indent 8 }}
     spec:
       containers:
         - name: {{ $name }}
@@ -36,6 +39,8 @@ spec:
               secretKeyRef:
                 name: {{ $bitbucket_secret }}
                 key: url
+          - name: PORT
+            value: {{ $v.port | quote }}
           - name: BITBUCKET_USERNAME
             valueFrom:
               secretKeyRef:
@@ -46,18 +51,7 @@ spec:
               secretKeyRef:
                 name: {{ $bitbucket_secret }}
                 key: password
-          {{- if .Values.bitbucket.ssl.ca }}
-          - name: CA_CERT
-            value: /etc/bitbucket-ssl/ca.pem
-          {{- end }}
-          {{- if .Values.bitbucket.ssl.cert }}
-          - name: HTTPS_CERT
-            value: /etc/bitbucket-ssl/cert.pem
-          {{- end }}
-          {{- if .Values.bitbucket.ssl.key }}
-          - name: HTTPS_KEY
-            value: /etc/bitbucket-ssl/key.pem
-          {{- end }}
+          {{- include "ssl.envs" $ssl | indent 10 }}
           {{- range $key, $value := $v.env }}
           - name: {{ $key }}
             value: {{ $value | quote }}
@@ -72,28 +66,10 @@ spec:
               protocol: TCP
           resources:
 {{ toYaml $v.resources | indent 12 }}
-      {{- if .Values.bitbucket.ssl }}
           volumeMounts:
-          - name: bitbucket-ssl
-            mountPath: "/etc/bitbucket-ssl"
+          {{- include "ssl.volumeMount" $ssl | indent 10 }}
       volumes:
-      - name: bitbucket-ssl
-        secret:
-          secretName: {{ $bitbucket_secret }}
-          items:
-          {{- if .Values.bitbucket.ssl.ca }}
-          - key: ca.pem
-            path: ca.pem
-          {{- end }}
-          {{- if .Values.bitbucket.ssl.cert }}
-          - key: cert.pem
-            path: cert.pem
-          {{- end }}
-          {{- if .Values.bitbucket.ssl.key }}
-          - key: key.pem
-            path: key.pem
-          {{- end }}
-      {{- end }}
+      {{- include "ssl.volumeSecret" $ssl | indent 6 }}
     {{- with $v.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

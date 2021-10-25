@@ -1,5 +1,5 @@
-{{- if .Values.bitbucket.url }}
-{{- $v := .Values.bitbucket.bitbucketBroker }}
+{{- if .Values.gitlab.url }}
+{{- $v := .Values.gitlab.gitlabBroker }}
 {{- $name := printf "%s-%s" (include "chart.fullname" . ) $v.nameSuffix }}
 apiVersion: v1
 kind: Service

@@ -14,66 +14,133 @@ global:
   ### Optionally set common pod labels
   # commonPodLabels: {}
 
+#######################################################
+#  Bitbucket 
+#######################################################
 bitbucket:
-  url: "localhost:7990"
+  url: 
   username: bitbucket
   password:
-  ### Optionally add pathes to ca cert and client cert/key files for bitbucket ssl connection 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
   # ssl:
-  #   ca: files/bb_ca_cert.pem
-  #   cert: files/bb_cert.pem
-  #   key: files/bb_key.pem
+  #   ca: -|
+  #     -----BEGIN CERTIFICATE-----
+  #     ca-cert
+  #     -----END CERTIFICATE
+  #   cert: -|
+  #     -----BEGIN CERTIFICATE-----
+  #     client-cert
+  #     -----END CERTIFICATE-----
+  #   key: -|
+  #     -----BEGIN RSA PRIVATE KEY-----
+  #     secure key
+  #     -----BEGIN RSA PRIVATE KEY-----
 
+  bitbucketBroker:
+    nameSuffix: bitbucket-broker
+    image:
+      repository: argonsecurity/broker
+      tag: bitbucket
 
-bitbucketBroker:
-  enabled: true
-  nameSuffix: bitbucket-broker
-  image:
-    repository: argonsecurity/broker
-    tag: bitbucket
+    port: 9091
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
 
-  port: 9091
-  service:
-    type: ClusterIP
-    annotations: {}
+  bitbucketSecretsScanner:
+    nameSuffix: bitbucket-secrets-scanner
+    image:
+      repository: argonsecurity/secrets-scanner-broker
+      tag: bitbucket
+
+    port: 9094
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
+
+  bitbucketSastScanner:
+    nameSuffix: bitbucket-sast-scanner
+    image:
+      repository: argonsecurity/sast-scanner-broker
+      tag: bitbucket
+
+    port: 9095
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
     
-  resources: {}
-  nodeSelector: {}
-  affinity: {}
-  tollerations: {}
 
-bitbucketSecretsScanner:
-  enabled: true
-  nameSuffix: bitbucket-secrets-scanner
-  image:
-    repository: argonsecurity/secrets-scanner-broker
-    tag: bitbucket
+#######################################################
+#  Gitlab 
+#######################################################
+gitlab:
+  url: 
+  token: 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  # ssl:
+  #   ca:
+  #   cert:
+  #   key:
 
-  port: 9094
-  service:
-    type: ClusterIP
-    annotations: {}
-    
-  resources: {}
-  nodeSelector: {}
-  affinity: {}
-  tollerations: {}
+  gitlabBroker:
+    nameSuffix: gitlab-broker
+    image:
+      repository: argonsecurity/broker
+      tag: gitlab
 
-bitbucketSastScanner:
-  enabled: true
-  nameSuffix: bitbucket-sast-scanner
-  image:
-    repository: argonsecurity/sast-scanner-broker
-    tag: bitbucket
+    port: 9091
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
 
-  port: 9095
-  service:
-    type: ClusterIP
-    annotations: {}
-    
-  resources: {}
-  nodeSelector: {}
-  affinity: {}
-  tollerations: {}
-    
-  
+  gitlabSecretsScanner:
+    nameSuffix: gitlab-secrets-scanner
+    image:
+      repository: argonsecurity/secrets-scanner-broker
+      tag: gitlab
+
+    port: 9094
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
+
+  gitlabSastScanner:
+    nameSuffix: gitlab-sast-scanner
+    image:
+      repository: argonsecurity/sast-scanner-broker
+      tag: gitlab
+
+    port: 9095
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}

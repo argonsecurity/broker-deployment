@@ -1,5 +1,5 @@
-{{- if .Values.bitbucketSastScanner.enabled }}
-{{- $v := .Values.bitbucketSastScanner }}
+{{- if .Values.bitbucket.url }}
+{{- $v := .Values.bitbucket.bitbucketSastScanner }}
 {{- $name := printf "%s-%s" (include "chart.fullname" . ) $v.nameSuffix }}
 apiVersion: v1
 kind: Service

@@ -1,8 +1,8 @@
-{{- if .Values.bitbucket.url }}
-{{- $v := .Values.bitbucket.bitbucketSecretsScanner }}
+{{- if .Values.gitlab.url }}
+{{- $v := .Values.gitlab.gitlabBroker }}
 {{- $name := printf "%s-%s" (include "chart.fullname" . ) $v.nameSuffix }}
-{{- $bitbucket_secret := printf "%s-%s" (include "chart.fullname" . ) "bitbucket" }}
-{{- $ssl := dict "secret" $bitbucket_secret "ssl" .Values.bitbucket.ssl }}
+{{- $gitlab_secret := printf "%s-%s" (include "chart.fullname" . ) "gitlab" }}
+{{- $ssl := dict "secret" $gitlab_secret "ssl" .Values.gitlab.ssl }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/bitbucket/secret.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/gitlab/secret.yaml") . | sha256sum }}
       labels:
         app.kubernetes.io/name: {{ $name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
@@ -34,23 +34,18 @@ spec:
             value: {{ .Values.global.argonServer }}
           - name: TOKEN
             value: {{ .Values.global.token }}
-          - name: PORT
-            value: {{ $v.port | quote }}
           - name: BASE_URL
             valueFrom:
               secretKeyRef:
-                name: {{ $bitbucket_secret }}
+                name: {{ $gitlab_secret }}
                 key: url
-          - name: BITBUCKET_USERNAME
+          - name: PORT
+            value: {{ $v.port | quote }}
+          - name: GITLAB_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
-                name: {{ $bitbucket_secret }}
-                key: username
-          - name: BITBUCKET_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ $bitbucket_secret }}
-                key: password
+                name: {{ $gitlab_secret }}
+                key: token
           {{- include "ssl.envs" $ssl | indent 10 }}
           {{- range $key, $value := $v.env }}
           - name: {{ $key }}
@@ -59,7 +54,7 @@ spec:
           {{- range $key, $value := .Values.global.env }}
           - name: {{ $key }}
             value: {{ $value | quote }}
-          {{- end }} 
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ $v.port }}

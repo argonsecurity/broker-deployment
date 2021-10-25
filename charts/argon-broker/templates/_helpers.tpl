@@ -56,3 +56,66 @@ example: {{ include common.image .Values.brokerBitbucket }}
 {{- $tag := .image.tag | default "latest" -}}
 {{- printf "%s/%s:%s" $registry $repository $tag -}}
 {{- end -}}
+
+{{/*
+ssl secret volume mount :
+example: 
+{{- $ssl := dict "secret" $bitbucket_secret "ssl" .Values.bitbucket.ssl }}
+....
+          envs:
+          ...
+          {{- include "ssl.envs" $ssl | indent 10 }}
+          
+          volumeMounts:
+          {{- include "ssl.volumeMount" $ssl | indent 10 }}
+      volumes:
+      {{- include "ssl.volumeSecret" $ssl | indent 6 }}
+*/}}
+
+{{- define "ssl.envs" -}}
+{{- if .ssl }}
+{{- $mountPath := ( printf "/etc/%s/ssl" .secret ) }}
+{{- if .ssl.ca }}
+- name: CA_CERT
+  value: {{ $mountPath }}/ca.pem
+{{- end }}
+{{- if .ssl.cert }}
+- name: HTTPS_CERT
+  value: {{ $mountPath }}/cert.pem
+{{- end }}
+{{- if .ssl.key }}
+- name: HTTPS_KEY
+  value: {{ $mountPath }}/key.pem
+{{- end }}
+{{- end }}
+{{- end -}}
+
+{{- define "ssl.volumeMount" -}}
+{{ if .ssl }}
+{{- $mountPath := ( printf "/etc/%s/ssl" .secret ) }}
+- name: {{ .volumeName | default "ssl" }}
+  mountPath: {{ $mountPath }}
+{{- end }}
+{{- end }}
+
+
+{{- define "ssl.volumeSecret" -}}
+{{- if .ssl }}
+- name: {{ .volumeName | default "ssl" }}
+  secret:
+    secretName: {{ .secret }}
+    items:
+    {{- if .ssl.ca }}
+    - key: ca.pem
+      path: ca.pem
+    {{- end }}
+    {{- if .ssl.cert }}
+    - key: cert.pem
+      path: cert.pem
+    {{- end }}
+    {{- if .ssl.key }}
+    - key: key.pem
+      path: key.pem
+    {{- end }}
+{{- end }}
+{{- end -}}
