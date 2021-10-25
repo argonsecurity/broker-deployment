@@ -2,6 +2,13 @@ apiVersion: v1
 entries:
   argon-broker:
   - apiVersion: v1
+    created: "2021-10-25T16:27:24.028084831Z"
+    digest: b15cfdddca03619528d51fc4f6f825d0a9361454ff5a7c69642ed01b357e4b6c
+    name: argon-broker
+    urls:
+    - https://github.com/argonsecurity/broker-deployment/releases/download/argon-broker-1.0.4/argon-broker-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v1
     created: "2021-10-25T14:48:14.111787043Z"
     digest: d68b06b3e54bb513abe1b4da5c133b4b0e41babd51f996af638a9f0765944945
     name: argon-broker
@@ -15,4 +22,4 @@ entries:
     urls:
     - https://github.com/argonsecurity/broker-deployment/releases/download/argon-broker-1.0.2/argon-broker-1.0.2.tgz
     version: 1.0.2
-generated: "2021-10-25T14:48:14.111812242Z"
+generated: "2021-10-25T16:27:24.028095831Z"
