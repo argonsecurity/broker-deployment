@@ -59,6 +59,7 @@ helm repo add argon https://argonsecurity.github.io/broker-deployment
 ### Simple Connect to Bitbucket server
 ```
 helm upgrade -i argon-broker argon/argon-broker --namespace argon --create-namespace \
+  --set global.token=***** \
   --set bitbucket.url="https://bitbucket.example.com" \
   --set bitbucket.username=bitbucket \
   --set bitbucket.password=******
