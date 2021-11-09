@@ -2,3 +2,5 @@
 *.pem
 
 out/
+.history
+.vscode

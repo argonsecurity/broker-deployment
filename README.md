@@ -43,7 +43,9 @@ helm upgrade -i $HELM_RELEASE argon/argon-broker --namespace argon --create-name
 | **nexus** |
 | nexus.url | Nexus URL, ex. https://nexus.example.com | yes, if Nexus Broker enabled |
 | nexus.token | Nexus token | yes, if Nexus Broker enabled |
-
+| **jira** |
+| jira.url | Jira URL, ex. https://azure.example.com | yes, if Jira Broker enabled 
+| jira.token | Jira token | yes, if Jira enabled |
 ## Additional helm values
 In addition to the values above it is possible to specify:
 - custom ca and client ssl certificates for servers

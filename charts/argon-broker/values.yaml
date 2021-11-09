@@ -288,3 +288,31 @@ nexus:
     nodeSelector: {}
     affinity: {}
     tollerations: {}
+
+#######################################################
+#  Jira 
+#######################################################
+jira:
+  url: 
+  token: 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  # ssl:
+  #   ca:
+  #   cert:
+  #   key:
+
+  jiraBroker:
+    nameSuffix: jira-broker
+    image:
+      repository: argonsecurity/broker
+      tag: jira
+
+    port: 9096
+    service:
+      type: ClusterIP
+      annotations: {}
+      
+    resources: {}
+    nodeSelector: {}
+    affinity: {}
+    tollerations: {}
