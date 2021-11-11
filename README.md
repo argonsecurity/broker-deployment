@@ -65,6 +65,23 @@ helm upgrade -i argon-broker argon/argon-broker --namespace argon --create-names
   --set bitbucket.password=******
 ```
 
+### Install multiple releases per repo provider
+Install different helm releases for each repo provoder
+#### bitbucket
+helm upgrade -i argon-broker-bitbucket argon/argon-broker --namespace argon --create-namespace \
+  --set global.token=***** \
+  --set bitbucket.url="https://bitbucket.example.com" \
+  --set bitbucket.username=bitbucket \
+  --set bitbucket.password=******
+
+#### jfrog
+helm upgrade -i argon-broker-jfrog argon/argon-broker --namespace argon --create-namespace \
+  --set global.token=***** \
+  --set jfrog.url="https://jfrog.example.com" \
+  --set jfrog.token=*****
+
+
+
 ### Advanced run with HTTP_PROXY and ssl certificates
 - create values file `my-env-values.yaml`:
 ```yaml
