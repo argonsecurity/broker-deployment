@@ -1,13 +1,14 @@
 global:
   ## Set Argon Server Address and token. Manadatory values
   argonServer: https://app-broker.argon.io
-  token: 
+  token:
+  username:
 
   ### Set Registry to pull images (default - docker.io)
   # registry: "docker.io"
-  
+
   ### Optionally Set Global Envs, for example for proxy
-  # env: 
+  # env:
   #   HTTP_PROXY: proxy.example.com:3128
   #   HTTPS_PROXY: proxy.example.com:3128
 
@@ -15,13 +16,13 @@ global:
   # commonPodLabels: {}
 
 #######################################################
-#  Bitbucket 
+#  Bitbucket
 #######################################################
 bitbucket:
-  url: 
+  url:
   username: bitbucket
   password:
-  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server
   # ssl:
   #   ca: -|
   #     -----BEGIN CERTIFICATE-----
@@ -46,7 +47,7 @@ bitbucket:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
@@ -62,7 +63,7 @@ bitbucket:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
@@ -78,20 +79,20 @@ bitbucket:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
     tollerations: {}
-    
 
 #######################################################
-#  Gitlab 
+#  Gitlab
 #######################################################
 gitlab:
-  url: 
-  token: 
-  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  url:
+  token:
+  username:
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server
   # ssl:
   #   ca:
   #   cert:
@@ -107,7 +108,7 @@ gitlab:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
@@ -123,7 +124,7 @@ gitlab:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
@@ -139,19 +140,20 @@ gitlab:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
     tollerations: {}
 
 #######################################################
-#  Jfrog 
+#  Jfrog
 #######################################################
 jfrog:
-  url: 
-  token: 
-  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  url:
+  token:
+  username:
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server
   # ssl:
   #   ca:
   #   cert:
@@ -167,19 +169,20 @@ jfrog:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
     tollerations: {}
 
 #######################################################
-#  Azure Devops 
+#  Azure Devops
 #######################################################
 azure:
-  url: 
-  token: 
-  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  url:
+  token:
+  username:
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server
   # ssl:
   #   ca:
   #   cert:
@@ -195,7 +198,7 @@ azure:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
@@ -211,7 +214,7 @@ azure:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
@@ -227,19 +230,20 @@ azure:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
     tollerations: {}
 
 #######################################################
-#  Jenkins 
+#  Jenkins
 #######################################################
 jenkins:
-  url: 
-  token: 
-  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  url:
+  token:
+  username:
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server
   # ssl:
   #   ca:
   #   cert:
@@ -255,19 +259,20 @@ jenkins:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
     tollerations: {}
 
 #######################################################
-#  Nexus 
+#  Nexus
 #######################################################
 nexus:
-  url: 
-  token: 
-  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  url:
+  token:
+  username:
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server
   # ssl:
   #   ca:
   #   cert:
@@ -283,19 +288,20 @@ nexus:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
     tollerations: {}
 
 #######################################################
-#  Jira 
+#  Jira
 #######################################################
 jira:
-  url: 
-  token: 
-  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server 
+  url:
+  token:
+  username:
+  ### Optionally add ssl ca cert and client cert/key for ssl connection to the server
   # ssl:
   #   ca:
   #   cert:
@@ -311,7 +317,7 @@ jira:
     service:
       type: ClusterIP
       annotations: {}
-      
+
     resources: {}
     nodeSelector: {}
     affinity: {}
