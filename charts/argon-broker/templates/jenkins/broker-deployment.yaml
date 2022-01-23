@@ -36,6 +36,8 @@ spec:
             value: {{ .Values.global.token }}
           - name: USERNAME
             value: {{ .Values.global.username }}
+          - name: PUBLIC_KEY
+            value: {{ .Values.global.public_key }}
           - name: PORT
             value: {{ $v.port | quote }}
           - name: BASE_URL

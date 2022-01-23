@@ -34,6 +34,8 @@ spec:
             value: {{ .Values.global.argonServer }}
           - name: TOKEN
             value: {{ .Values.global.token }}
+          - name: PUBLIC_KEY
+            value: {{ .Values.global.public_key }}
           - name: USERNAME
             value: {{ .Values.global.username }}
           - name: PORT
