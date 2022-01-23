@@ -36,6 +36,8 @@ spec:
             value: {{ .Values.global.token }}
           - name: USERNAME
             value: {{ .Values.global.username }}
+          - name: PUBLIC_KEY
+            value: {{ .Values.global.public_key }}
           - name: BASE_URL
             valueFrom:
               secretKeyRef:
