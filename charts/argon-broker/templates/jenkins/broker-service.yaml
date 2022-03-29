@@ -1,4 +1,3 @@
-{{- if .Values.jenkins.url }}
 {{- $v := .Values.jenkins.jenkinsBroker }}
 {{- $name := printf "%s-%s" (include "chart.fullname" . ) $v.nameSuffix }}
 apiVersion: v1

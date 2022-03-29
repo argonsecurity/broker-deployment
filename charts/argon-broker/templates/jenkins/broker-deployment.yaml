@@ -1,4 +1,3 @@
-{{- if .Values.jenkins.url }}
 {{- $v := .Values.jenkins.jenkinsBroker }}
 {{- $name := printf "%s-%s" (include "chart.fullname" . ) $v.nameSuffix }}
 {{- $jenkins_secret := printf "%s-%s" (include "chart.fullname" . ) "jenkins" }}
@@ -40,16 +39,6 @@ spec:
             value: {{ .Values.global.public_key }}
           - name: PORT
             value: {{ $v.port | quote }}
-          - name: BASE_URL
-            valueFrom:
-              secretKeyRef:
-                name: {{ $jenkins_secret }}
-                key: url
-          - name: ACCESS_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: {{ $jenkins_secret }}
-                key: token
           {{- include "ssl.envs" $ssl | indent 10 }}
           {{- range $key, $value := $v.env }}
           - name: {{ $key }}
